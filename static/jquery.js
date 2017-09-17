@@ -10242,25 +10242,55 @@ jQuery.noConflict = function( deep ) {
 // Expose jQuery and $ identifiers, even in AMD
 // (#7102#comment:10, https://github.com/jquery/jquery/pull/557)
 // and CommonJS for browser emulators (#13566)
+
+
+
 if ( !noGlobal ) {
 	window.jQuery = window.$ = jQuery;
 }
+
+
+
 $(function() {
-    $('btnSignUp').click(function() {
- 
+    $('#btnSignIn').click(function() {
+
+
+        $.ajax({
+            url: '/signIn',
+            data: $('form').serialize(),
+            type: 'POST',
+            success: function(response) {
+ 				console.log("This is working so far, sign in");
+
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+});
+
+
+$(function() {
+    $('#btnSignUp').click(function() {
+
+
         $.ajax({
             url: '/signUp',
             data: $('form').serialize(),
             type: 'POST',
             success: function(response) {
-                console.log(response);
+ 				console.log("This is working so far, sign up");
+
             },
             error: function(error) {
-                console.log("hereeeeeeeeeee");
+                console.log(error);
             }
         });
     });
 });
+
+
 
 
 
