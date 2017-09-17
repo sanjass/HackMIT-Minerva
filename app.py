@@ -5,8 +5,10 @@ mysql = MySQL()
 
 app = Flask(__name__)
 app.config['MYSQL_DATABASE_USER'] = 'root'
+
 app.config['MYSQL_DATABASE_PASSWORD'] = 'matematika4'
 app.config['MYSQL_DATABASE_DB'] = 'letspset_sanja'
+
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
 conn = mysql.connect()
@@ -78,3 +80,4 @@ def profile():
 
 if __name__ == "__main__":
 	app.run(debug=True, port=2003)
+
