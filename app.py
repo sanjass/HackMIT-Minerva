@@ -5,8 +5,8 @@ mysql = MySQL()
 
 app = Flask(__name__)
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'whatever'
-app.config['MYSQL_DATABASE_DB'] = 'letspset_sanja'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'HM!iagtcamit33'
+app.config['MYSQL_DATABASE_DB'] = 'letspset_andrea'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
 conn = mysql.connect()
@@ -77,4 +77,4 @@ def profile():
 	return render_template('profile.html')
 
 if __name__ == "__main__":
-	app.run(debug=True, port=2001)
+	app.run(debug=True, port=2000)
