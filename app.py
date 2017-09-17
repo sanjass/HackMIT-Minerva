@@ -1,11 +1,11 @@
-from flask import Flask, render_template, json, request
+from flask import Flask, render_template, json, request, redirect, url_for
 from flask.ext.mysql import MySQL
 from werkzeug import generate_password_hash, check_password_hash
 mysql = MySQL()
 
 app = Flask(__name__)
 app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'whatever'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'matematika4'
 app.config['MYSQL_DATABASE_DB'] = 'letspset_sanja'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
@@ -45,7 +45,7 @@ def signUp():
 			if len(data) is 0:
 				conn.commit()
 				console.log("user created!")
-				return json.dumps({'message':'User created successfully !'})
+				return redirect(url_for('home'))
 			else:
 				return json.dumps({'error':str(data[0])})
 		else:
@@ -77,4 +77,4 @@ def profile():
 	return render_template('profile.html')
 
 if __name__ == "__main__":
-	app.run(debug=True, port=2001)
+	app.run(debug=True, port=2003)
