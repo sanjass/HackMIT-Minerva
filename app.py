@@ -47,7 +47,7 @@ def signUp():
 			if len(data) is 0:
 				conn.commit()
 				console.log("user created!")
-				return redirect(url_for('home'))
+				return json.dumps({'message':'User created successfully !'})
 			else:
 				return json.dumps({'error':str(data[0])})
 		else:
