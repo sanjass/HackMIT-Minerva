@@ -11,8 +11,8 @@ app.config['MYSQL_DATABASE_DB'] = 'letspset_sanja'
 
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
-conn = mysql.connect()
-cursor = conn.cursor()
+
+
 @app.route("/")
 def main():
 	return render_template('index.html')
@@ -28,6 +28,8 @@ def signup():
 
 @app.route("/signUp",methods=['POST','GET'])
 def signUp():
+	conn = mysql.connect()
+	cursor = conn.cursor()
 	try:
 		_name = request.form['inputName']
 		_email = request.form['inputEmail']
@@ -38,15 +40,14 @@ def signUp():
 			
 			# All Good, let's call MySQL
 			
-			conn = mysql.connect()
-			cursor = conn.cursor()
+			
 			_hashed_password = generate_password_hash(_password)
+
 			cursor.callproc('sp_createUser',(_name,_email,_hashed_password))
 			data = cursor.fetchall()
 
 			if len(data) is 0:
 				conn.commit()
-				console.log("user created!")
 				return json.dumps({'message':'User created successfully !'})
 			else:
 				return json.dumps({'error':str(data[0])})
@@ -77,6 +78,31 @@ def signIn():
 @app.route("/profile")
 def profile():
 	return render_template('profile.html')
+@app.route('/validateLogin',methods=['POST'])
+def validateLogin():
+	try:
+		_username = request.form['inputEmail']
+		_password = request.form['inputPassword']
+
+
+
+		con = mysql.connect()
+		cursor=con.cursor()
+		cursor.callproc('sp_validateLogin',(_username,))
+		data = cursor.fetchall()
+		if len(data) > 0:
+			if check_password_hash(str(data[0][3]),_password):
+				return redirect('/profile')
+			else:
+				return render_template('error.html',error = 'Wrong Email address or Password1111.')
+		else:
+			return render_template('error.html',error = 'Wrong Email address or Password22222.')
+ 
+	except Exception as e:
+		return render_template('error.html',error = str(e))
+	finally:
+		cursor.close()
+		con.close()
 
 if __name__ == "__main__":
 	app.run(debug=True, port=2003)
