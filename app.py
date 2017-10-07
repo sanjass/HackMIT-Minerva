@@ -94,9 +94,9 @@ def validateLogin():
 			if check_password_hash(str(data[0][3]),_password):
 				return redirect('/profile')
 			else:
-				return render_template('error.html',error = 'Wrong Email address or Password1111.')
+				return render_template('error.html',error = 'Wrong Email address or Password.')
 		else:
-			return render_template('error.html',error = 'Wrong Email address or Password22222.')
+			return render_template('error.html',error = 'Wrong Email address or Password.')
  
 	except Exception as e:
 		return render_template('error.html',error = str(e))
