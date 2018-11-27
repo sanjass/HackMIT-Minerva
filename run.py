@@ -9,8 +9,8 @@ import views
 
 app.config['MYSQL_DATABASE_USER'] = 'root'
 
-app.config['MYSQL_DATABASE_PASSWORD'] = 'matematika4'
-app.config['MYSQL_DATABASE_DB'] = 'letspset_sanja'
+app.config['MYSQL_DATABASE_PASSWORD'] = '***'
+app.config['MYSQL_DATABASE_DB'] = '***'
 
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
